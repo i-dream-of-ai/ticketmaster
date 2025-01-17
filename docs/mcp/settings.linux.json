@@ -74,6 +74,15 @@
         "EMBEDDING_PROVIDER": "voyage",
         "VOYAGE_API_KEY": "pa-0p-oytl1I79v5M-x_N9Cz4_SsEm7KVN2VV1NmEs__VE"
       }
+    },
+    "ticketmaster": {
+      "command": "node",
+      "args": ["/home/delorenj/code/mcp-server-ticketmaster/dist/index.js"],
+      "env": {
+        "TICKETMASTER_API_KEY": "ADIQtx53tQHU6ql4wJiBVSMzU3XnUA60"
+      },
+      "disabled": false,
+      "alwaysAllow": []
     }
   }
 }

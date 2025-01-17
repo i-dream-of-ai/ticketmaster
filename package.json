@@ -1,0 +1,45 @@
+{
+  "name": "mcp-server-ticketmaster",
+  "version": "0.1.0",
+  "description": "A Model Context Protocol server for Ticketmaster event discovery",
+  "private": false,
+  "type": "module",
+  "bin": {
+    "mcp-server-ticketmaster": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delorenj/mcp-server-ticketmaster.git"
+  },
+  "keywords": [
+    "mcp",
+    "ticketmaster",
+    "events",
+    "madison-square-garden",
+    "msg"
+  ],
+  "author": "Jarad DeLorenzo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/delorenj/mcp-server-ticketmaster/issues"
+  },
+  "homepage": "https://github.com/delorenj/mcp-server-ticketmaster#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "0.6.0",
+    "axios": "^1.6.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3"
+  }
+}
