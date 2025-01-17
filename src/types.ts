@@ -23,9 +23,72 @@ export interface TicketmasterEvent {
     }>;
 }
 
+export interface TicketmasterVenue {
+    id: string;
+    name: string;
+    url: string;
+    city: {
+        name: string;
+    };
+    state: {
+        name: string;
+        stateCode: string;
+    };
+    country: {
+        name: string;
+        countryCode: string;
+    };
+    address: {
+        line1: string;
+    };
+    location: {
+        longitude: string;
+        latitude: string;
+    };
+    markets: Array<{
+        id: string;
+    }>;
+    images?: Array<{
+        url: string;
+        ratio: string;
+        width: number;
+        height: number;
+    }>;
+}
+
+export interface TicketmasterAttraction {
+    id: string;
+    name: string;
+    type: string;
+    url: string;
+    images: Array<{
+        url: string;
+        ratio: string;
+        width: number;
+        height: number;
+    }>;
+    classifications?: Array<{
+        primary: boolean;
+        segment: {
+            id: string;
+            name: string;
+        };
+        genre?: {
+            id: string;
+            name: string;
+        };
+        subGenre?: {
+            id: string;
+            name: string;
+        };
+    }>;
+}
+
 export interface TicketmasterResponse {
     _embedded?: {
-        events: TicketmasterEvent[];
+        events?: TicketmasterEvent[];
+        venues?: TicketmasterVenue[];
+        attractions?: TicketmasterAttraction[];
     };
     page: {
         size: number;
@@ -54,3 +117,5 @@ export class TicketmasterApiError extends Error {
         this.name = 'TicketmasterApiError';
     }
 }
+
+export type SearchType = 'event' | 'venue' | 'attraction';

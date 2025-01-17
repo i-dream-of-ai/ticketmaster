@@ -8,14 +8,13 @@ import {
     McpError,
 } from '@modelcontextprotocol/sdk/types.js';
 import { TicketmasterClient } from './TicketmasterClient.js';
-import { TicketmasterApiError } from './types.js';
+import { SearchType, TicketmasterApiError } from './types.js';
 
 const API_KEY = process.env.TICKETMASTER_API_KEY;
 if (!API_KEY) {
     throw new Error('TICKETMASTER_API_KEY environment variable is required');
 }
 
-// Now TypeScript knows API_KEY is definitely a string
 const client = new TicketmasterClient(API_KEY);
 
 class TicketmasterServer {
@@ -49,50 +48,117 @@ class TicketmasterServer {
         this.server.setRequestHandler(ListToolsRequestSchema, async () => ({
             tools: [
                 {
-                    name: 'find_msg_events',
-                    description: 'Get events at Madison Square Garden for next month',
+                    name: 'search_ticketmaster',
+                    description: 'Search for events, venues, or attractions on Ticketmaster',
                     inputSchema: {
                         type: 'object',
                         properties: {
+                            type: {
+                                type: 'string',
+                                enum: ['event', 'venue', 'attraction'],
+                                description: 'Type of search to perform'
+                            },
+                            keyword: {
+                                type: 'string',
+                                description: 'Search keyword or term'
+                            },
                             startDate: {
                                 type: 'string',
-                                description: 'Start date in YYYY-MM-DD format',
+                                description: 'Start date in YYYY-MM-DD format'
                             },
                             endDate: {
                                 type: 'string',
-                                description: 'End date in YYYY-MM-DD format',
+                                description: 'End date in YYYY-MM-DD format'
                             },
+                            city: {
+                                type: 'string',
+                                description: 'City name'
+                            },
+                            stateCode: {
+                                type: 'string',
+                                description: 'State code (e.g., NY, CA)'
+                            },
+                            countryCode: {
+                                type: 'string',
+                                description: 'Country code (e.g., US, CA)'
+                            },
+                            venueId: {
+                                type: 'string',
+                                description: 'Specific venue ID to search'
+                            },
+                            attractionId: {
+                                type: 'string',
+                                description: 'Specific attraction ID to search'
+                            },
+                            classificationName: {
+                                type: 'string',
+                                description: 'Event classification/category (e.g., "Sports", "Music")'
+                            }
                         },
-                        required: ['startDate', 'endDate'],
+                        required: ['type'],
                     },
                 },
             ],
         }));
 
         this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
-            if (request.params.name !== 'find_msg_events') {
+            if (request.params.name !== 'search_ticketmaster') {
                 throw new McpError(
                     ErrorCode.MethodNotFound,
                     `Unknown tool: ${request.params.name}`
                 );
             }
 
-            const { startDate, endDate } = request.params.arguments as {
-                startDate: string;
-                endDate: string;
+            const {
+                type,
+                keyword,
+                startDate,
+                endDate,
+                ...otherParams
+            } = request.params.arguments as {
+                type: SearchType;
+                keyword?: string;
+                startDate?: string;
+                endDate?: string;
+                city?: string;
+                stateCode?: string;
+                countryCode?: string;
+                venueId?: string;
+                attractionId?: string;
+                classificationName?: string;
             };
 
             try {
-                const events = await this.client.getEventsAtVenue(
-                    new Date(startDate),
-                    new Date(endDate)
-                );
+                const query = {
+                    keyword,
+                    startDateTime: startDate ? new Date(startDate) : undefined,
+                    endDateTime: endDate ? new Date(endDate) : undefined,
+                    ...otherParams
+                };
+
+                let results;
+                switch (type) {
+                    case 'event':
+                        results = await this.client.searchEvents(query);
+                        break;
+                    case 'venue':
+                        results = await this.client.searchVenues(query);
+                        break;
+                    case 'attraction':
+                        results = await this.client.searchAttractions(query);
+                        break;
+                    default:
+                        throw new McpError(
+                            ErrorCode.InvalidParams,
+                            `Invalid search type: ${type}`
+                        );
+                }
 
                 return {
                     content: [
                         {
                             type: 'text',
-                            text: JSON.stringify(events, null, 2),
+                            text: JSON.stringify(results, null, 2),
                         },
                     ],
                 };

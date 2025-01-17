@@ -5,7 +5,7 @@
   "private": false,
   "type": "module",
   "bin": {
-    "mcp-server-ticketmaster": "./build/index.js"
+    "mcp-server-ticketmaster": "build/index.js"
   },
   "files": [
     "build"
@@ -27,7 +27,11 @@
     "madison-square-garden",
     "msg"
   ],
-  "author": "Jarad DeLorenzo",
+  "author": {
+    "name": "Jason DeLorenzo",
+    "email": "jaradd@gmail.com",
+    "url": "https://github.com/delorenj"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/delorenj/mcp-server-ticketmaster/issues"
