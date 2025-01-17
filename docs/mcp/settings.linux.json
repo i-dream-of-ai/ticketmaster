@@ -1,0 +1,79 @@
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/delorenj"
+      ],
+      "alwaysAllow": [
+        "read_file",
+        "read_multiple_files",
+        "create_directory",
+        "list_directory",
+        "search_files",
+        "get_file_info",
+        "list_allowed_directories"
+      ]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "$BRAVE_API_KEY"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_PERSONAL_ACCESS_TOKEN"
+      }
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "alwaysAllow": [
+        "create_entities",
+        "create_relations",
+        "add_observations",
+        "delete_entities",
+        "delete_observations",
+        "delete_relations",
+        "read_graph",
+        "search_nodes",
+        "open_nodes"
+      ]
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@suekou/mcp-notion-server"],
+      "env": {
+        "NOTION_API_TOKEN": "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"
+      }
+    },
+    "mcp-installer": {
+      "command": "npx",
+      "args": ["-y", "@anaisbetts/mcp-installer"],
+      "disabled": false,
+      "alwaysAllow": []
+    },
+    "ragdocs": {
+      "command": "node",
+      "args": [
+        "/home/delorenj/.local/share/mise/installs/node/latest/lib/node_modules/@qpd-v/mcp-server-ragdocs/build/index.js"
+      ],
+      "env": {
+        "QDRANT_URL": "https://0f03c0cf-b87c-4dd6-b757-c13f9ccf6c63.us-east4-0.gcp.cloud.qdrant.io",
+        "QDRANT_API_KEY": "HQFWvdE_RI210EzAsDdfy6SwJBaAAED04LI48nrLj5mY571u2F_SDg",
+        "EMBEDDING_PROVIDER": "voyage",
+        "VOYAGE_API_KEY": "pa-0p-oytl1I79v5M-x_N9Cz4_SsEm7KVN2VV1NmEs__VE"
+      }
+    }
+  }
+}
