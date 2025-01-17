@@ -20,13 +20,19 @@ npm install mcp-server-ticketmaster
 
 ## Configuration
 
-The server requires a Ticketmaster API key. You can get one by:
-1. Going to https://developer.ticketmaster.com/
-2. Creating an account or signing in
-3. Going to "My Apps" in your account
-4. Creating a new app to get your API key
+1. Get your Ticketmaster API key:
+   - Go to https://developer.ticketmaster.com/
+   - Create an account or sign in
+   - Go to "My Apps" in your account
+   - Create a new app to get your API key
 
-Set your API key in your MCP settings file:
+2. Create a `.env` file in your project root:
+   ```bash
+   cp .env.example .env
+   ```
+   Then add your Ticketmaster API key to the `.env` file.
+
+3. Add to your MCP settings file:
 
 ```json
 {
@@ -35,7 +41,7 @@ Set your API key in your MCP settings file:
       "command": "node",
       "args": ["path/to/mcp-server-ticketmaster/build/index.js"],
       "env": {
-        "TICKETMASTER_API_KEY": "your-api-key-here"
+        "TICKETMASTER_API_KEY": "$TICKETMASTER_API_KEY"
       }
     }
   }
@@ -65,10 +71,43 @@ Example usage in Claude:
 ## Development
 
 1. Clone the repository
-2. Install dependencies: `npm install`
-3. Build the project: `npm run build`
-4. Test with the inspector: `npm run inspector`
+2. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+3. Add your Ticketmaster API key to `.env`
+4. Install dependencies:
+   ```bash
+   npm install
+   ```
+5. Build the project:
+   ```bash
+   npm run build
+   ```
+6. Test with the inspector:
+   ```bash
+   npm run inspector
+   ```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch:
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m 'Add some amazing feature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. Open a Pull Request
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT License - see [LICENSE](LICENSE) file for details

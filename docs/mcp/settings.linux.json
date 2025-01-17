@@ -54,7 +54,7 @@
       "command": "npx",
       "args": ["-y", "@suekou/mcp-notion-server"],
       "env": {
-        "NOTION_API_TOKEN": "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"
+        "NOTION_API_TOKEN": "$NOTION_API_TOKEN"
       }
     },
     "mcp-installer": {
@@ -69,17 +69,17 @@
         "/home/delorenj/.local/share/mise/installs/node/latest/lib/node_modules/@qpd-v/mcp-server-ragdocs/build/index.js"
       ],
       "env": {
-        "QDRANT_URL": "https://0f03c0cf-b87c-4dd6-b757-c13f9ccf6c63.us-east4-0.gcp.cloud.qdrant.io",
-        "QDRANT_API_KEY": "HQFWvdE_RI210EzAsDdfy6SwJBaAAED04LI48nrLj5mY571u2F_SDg",
+        "QDRANT_URL": "$QDRANT_URL",
+        "QDRANT_API_KEY": "$QDRANT_API_KEY",
         "EMBEDDING_PROVIDER": "voyage",
-        "VOYAGE_API_KEY": "pa-0p-oytl1I79v5M-x_N9Cz4_SsEm7KVN2VV1NmEs__VE"
+        "VOYAGE_API_KEY": "$VOYAGE_API_KEY"
       }
     },
     "ticketmaster": {
       "command": "node",
-      "args": ["/home/delorenj/code/mcp-server-ticketmaster/dist/index.js"],
+      "args": ["/home/delorenj/code/mcp-server-ticketmaster/build/index.js"],
       "env": {
-        "TICKETMASTER_API_KEY": "ADIQtx53tQHU6ql4wJiBVSMzU3XnUA60"
+        "TICKETMASTER_API_KEY": "$TICKETMASTER_API_KEY"
       },
       "disabled": false,
       "alwaysAllow": []
