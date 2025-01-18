@@ -1,11 +1,20 @@
+export type SearchType = 'event' | 'venue' | 'attraction';
+
 export interface TicketmasterEvent {
     id: string;
     name: string;
+    type: string;
+    url: string;
+    locale: string;
     dates: {
         start: {
             localDate: string;
             localTime: string;
             dateTime: string;
+        };
+        timezone?: string;
+        status: {
+            code: string;
         };
     };
     priceRanges?: Array<{
@@ -14,19 +23,26 @@ export interface TicketmasterEvent {
         min: number;
         max: number;
     }>;
-    url: string;
     images: Array<{
-        url: string;
         ratio: string;
+        url: string;
         width: number;
         height: number;
     }>;
+    _embedded?: {
+        venues?: TicketmasterVenue[];
+        attractions?: TicketmasterAttraction[];
+    };
 }
 
 export interface TicketmasterVenue {
     id: string;
     name: string;
-    url: string;
+    type: string;
+    url?: string;
+    locale: string;
+    postalCode?: string;
+    timezone?: string;
     city: {
         name: string;
     };
@@ -41,29 +57,21 @@ export interface TicketmasterVenue {
     address: {
         line1: string;
     };
-    location: {
+    location?: {
         longitude: string;
         latitude: string;
     };
-    markets: Array<{
-        id: string;
-    }>;
-    images?: Array<{
-        url: string;
-        ratio: string;
-        width: number;
-        height: number;
-    }>;
 }
 
 export interface TicketmasterAttraction {
     id: string;
     name: string;
     type: string;
-    url: string;
-    images: Array<{
-        url: string;
+    url?: string;
+    locale: string;
+    images?: Array<{
         ratio: string;
+        url: string;
         width: number;
         height: number;
     }>;
@@ -73,11 +81,7 @@ export interface TicketmasterAttraction {
             id: string;
             name: string;
         };
-        genre?: {
-            id: string;
-            name: string;
-        };
-        subGenre?: {
+        genre: {
             id: string;
             name: string;
         };
@@ -117,5 +121,3 @@ export class TicketmasterApiError extends Error {
         this.name = 'TicketmasterApiError';
     }
 }
-
-export type SearchType = 'event' | 'venue' | 'attraction';

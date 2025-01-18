@@ -1,4 +1,4 @@
-# MCP Server for Ticketmaster Events
+# MCP Server for Ticketmaster
 
 A Model Context Protocol server that provides tools for discovering events, venues, and attractions through the Ticketmaster Discovery API.
 
@@ -11,7 +11,10 @@ A Model Context Protocol server that provides tools for discovering events, venu
   - Venue-specific searches
   - Attraction-specific searches
   - Event classifications/categories
-- Returns structured JSON data with details including:
+- Output formats:
+  - Structured JSON data for programmatic use
+  - Human-readable text for direct consumption
+- Comprehensive data including:
   - Names and IDs
   - Dates and times (for events)
   - Price ranges (for events)
@@ -53,18 +56,25 @@ Set your API key in your MCP settings file:
 ## Usage
 
 The server provides a tool called `search_ticketmaster` that accepts:
-- `type`: Type of search ('event', 'venue', or 'attraction')
-- `keyword`: Optional search term
-- `startDate`: Optional start date in YYYY-MM-DD format (for events)
-- `endDate`: Optional end date in YYYY-MM-DD format (for events)
-- `city`: Optional city name
-- `stateCode`: Optional state code (e.g., 'NY')
-- `countryCode`: Optional country code (e.g., 'US')
-- `venueId`: Optional specific venue ID
-- `attractionId`: Optional specific attraction ID
-- `classificationName`: Optional event category (e.g., 'Sports', 'Music')
 
-Example usage in Claude:
+### Required Parameters
+- `type`: Type of search ('event', 'venue', or 'attraction')
+
+### Optional Parameters
+- `keyword`: Search term
+- `startDate`: Start date in YYYY-MM-DD format (for events)
+- `endDate`: End date in YYYY-MM-DD format (for events)
+- `city`: City name
+- `stateCode`: State code (e.g., 'NY')
+- `countryCode`: Country code (e.g., 'US')
+- `venueId`: Specific venue ID
+- `attractionId`: Specific attraction ID
+- `classificationName`: Event category (e.g., 'Sports', 'Music')
+- `format`: Output format ('json' or 'text', defaults to 'json')
+
+### Examples
+
+#### Structured JSON Output (Default)
 ```
 <use_mcp_tool>
 <server_name>ticketmaster</server_name>
@@ -77,6 +87,25 @@ Example usage in Claude:
   "endDate": "2025-02-28",
   "city": "New York",
   "stateCode": "NY"
+}
+</arguments>
+</use_mcp_tool>
+```
+
+#### Human-Readable Text Output
+```
+<use_mcp_tool>
+<server_name>ticketmaster</server_name>
+<tool_name>search_ticketmaster</tool_name>
+<arguments>
+{
+  "type": "event",
+  "keyword": "concert",
+  "startDate": "2025-02-01",
+  "endDate": "2025-02-28",
+  "city": "New York",
+  "stateCode": "NY",
+  "format": "text"
 }
 </arguments>
 </use_mcp_tool>

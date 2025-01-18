@@ -8,7 +8,8 @@ import {
     McpError,
 } from '@modelcontextprotocol/sdk/types.js';
 import { TicketmasterClient } from './TicketmasterClient.js';
-import { SearchType, TicketmasterApiError } from './types.js';
+import { SearchType } from './types.js';
+import { formatResults } from './formatters.js';
 
 const API_KEY = process.env.TICKETMASTER_API_KEY;
 if (!API_KEY) {
@@ -26,7 +27,7 @@ class TicketmasterServer {
         this.server = new Server(
             {
                 name: 'ticketmaster',
-                version: '0.1.0',
+                version: '0.2.0',
             },
             {
                 capabilities: {
@@ -93,6 +94,12 @@ class TicketmasterServer {
                             classificationName: {
                                 type: 'string',
                                 description: 'Event classification/category (e.g., "Sports", "Music")'
+                            },
+                            format: {
+                                type: 'string',
+                                enum: ['json', 'text'],
+                                description: 'Output format (defaults to json)',
+                                default: 'json'
                             }
                         },
                         required: ['type'],
@@ -111,12 +118,14 @@ class TicketmasterServer {
 
             const {
                 type,
+                format = 'json',
                 keyword,
                 startDate,
                 endDate,
                 ...otherParams
             } = request.params.arguments as {
                 type: SearchType;
+                format?: 'json' | 'text';
                 keyword?: string;
                 startDate?: string;
                 endDate?: string;
@@ -154,21 +163,25 @@ class TicketmasterServer {
                         );
                 }
 
+                const content = format === 'json' 
+                    ? JSON.stringify(results, null, 2)
+                    : formatResults(type, results, format !== 'text');
+
                 return {
                     content: [
                         {
                             type: 'text',
-                            text: JSON.stringify(results, null, 2),
+                            text: content,
                         },
                     ],
                 };
             } catch (error) {
-                if (error instanceof TicketmasterApiError) {
+                if (error instanceof Error) {
                     return {
                         content: [
                             {
                                 type: 'text',
-                                text: `API Error: ${error.message} (Code: ${error.code}, Status: ${error.status})`,
+                                text: `Error: ${error.message}`,
                             },
                         ],
                         isError: true,

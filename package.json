@@ -1,11 +1,11 @@
 {
   "name": "mcp-server-ticketmaster",
-  "version": "0.1.0",
-  "description": "A Model Context Protocol server for Ticketmaster event discovery",
+  "version": "0.2.0",
+  "description": "A Model Context Protocol server for discovering events, venues, and attractions through the Ticketmaster Discovery API",
   "private": false,
   "type": "module",
   "bin": {
-    "mcp-server-ticketmaster": "build/index.js"
+    "mcp-server-ticketmaster": "./build/index.js"
   },
   "files": [
     "build"
@@ -24,11 +24,12 @@
     "mcp",
     "ticketmaster",
     "events",
-    "madison-square-garden",
-    "msg"
+    "venues",
+    "attractions",
+    "discovery-api"
   ],
   "author": {
-    "name": "Jason DeLorenzo",
+    "name": "Jarad DeLorenzo",
     "email": "jaradd@gmail.com",
     "url": "https://github.com/delorenj"
   },
