@@ -1,9 +1,10 @@
 # Goal
 
-Implement the MVP of this new ticketmaster MCP server.
+Publish my package under @delorenj namespace
 
 ## Acceptance Criteria
 
-1. I can ask you to find all events at MSG next month and you will return structured json data representing those events.
+1. I can install the server by running `npx -y install @delorenj/mcp-server-ticketmaster`
 
-> Note: PLEASE PRACTICE TDD
+> Note
+The first thing you should do is fully index the https://docs.npmjs.com/ docs. We need to find out the exact requirements to accomplish this goal.

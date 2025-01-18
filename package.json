@@ -1,5 +1,5 @@
 {
-  "name": "mcp-server-ticketmaster",
+  "name": "@delorenj/mcp-server-ticketmaster",
   "version": "0.2.5",
   "description": "A Model Context Protocol server for discovering events, venues, and attractions through the Ticketmaster Discovery API",
   "private": false,
@@ -40,6 +40,7 @@
   "homepage": "https://github.com/delorenj/mcp-server-ticketmaster#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "0.6.0",
+    "@playwright/test": "^1.49.1",
     "axios": "^1.6.5",
     "dotenv": "^16.3.1"
   },

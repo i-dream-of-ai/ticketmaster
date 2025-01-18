@@ -26,7 +26,7 @@ A Model Context Protocol server that provides tools for discovering events, venu
 ## Installation
 
 ```bash
-npm install mcp-server-ticketmaster
+npx -y install @delorenj/mcp-server-ticketmaster
 ```
 
 ## Configuration
@@ -43,8 +43,8 @@ Set your API key in your MCP settings file:
 {
   "mcpServers": {
     "ticketmaster": {
-      "command": "node",
-      "args": ["path/to/mcp-server-ticketmaster/build/index.js"],
+      "command": "npx",
+      "args": ["-y", "@delorenj/mcp-server-ticketmaster"],
       "env": {
         "TICKETMASTER_API_KEY": "your-api-key-here"
       }
