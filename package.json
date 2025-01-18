@@ -1,6 +1,6 @@
 {
   "name": "mcp-server-ticketmaster",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "description": "A Model Context Protocol server for discovering events, venues, and attractions through the Ticketmaster Discovery API",
   "private": false,
   "type": "module",
