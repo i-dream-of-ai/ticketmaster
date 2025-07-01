@@ -3,6 +3,8 @@
 
 A Model Context Protocol server that provides tools for discovering events, venues, and attractions through the Ticketmaster Discovery API.
 
+<a href="https://glama.ai/mcp/servers/u91gv8f3on"><img width="380" height="200" src="https://glama.ai/mcp/servers/u91gv8f3on/badge" alt="Server for Ticketmaster Events MCP server" /></a>
+
 ## Features
 
 - Search for events, venues, and attractions with flexible filtering:
@@ -28,7 +30,7 @@ A Model Context Protocol server that provides tools for discovering events, venu
 
 ### Installing via Smithery
 
-To install MCP Server for Ticketmaster for Claude Desktop automatically via [Smithery](https://smithery.ai/server/mcp-server-ticketmaster):
+To install mcp-server-ticketmaster for Claude Desktop automatically via [Smithery](https://smithery.ai/server/mcp-server-ticketmaster):
 
 ```bash
 npx -y @smithery/cli install mcp-server-ticketmaster --client claude
